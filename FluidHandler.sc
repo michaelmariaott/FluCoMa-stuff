@@ -21,6 +21,10 @@ FluidHandler {
 		^this;
 	}
 
+	synth {
+		^fluidObj.synth;
+	}
+
 	attachIO {
 		fluidObj.inBus_(inBus).outBus_(outBus).inBuffer_(inBuf).outBuffer_(outBuf);
 	}
