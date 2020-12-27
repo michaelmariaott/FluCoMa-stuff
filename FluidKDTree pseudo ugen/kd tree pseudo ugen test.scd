@@ -38,19 +38,11 @@ s.waitForBoot({
 			var xstream = LFDNoise3.kr(2.dup(~n_xdims));
 			var ystream;
 
-			//=========== manually in the synthdef ===============
-			/*~n_xdims.do({
-				arg i;
-				BufWr.kr(xstream[i],~inBuf,i);
-			});
-			~tree.kr(Impulse.kr(10),~inBuf,~outBuf,1,~y_ds);
-			ystream = ~n_ydims.collect({
-				arg i;
-				BufRd.kr(1,~outBuf,i,1,1);
-			});*/
+			// ============= if you do want to know the buffers yourself, to access them elsewhere: ====================
+			// ystream = ~tree.krstream(Impulse.kr(10),~inBuf,~outBuf,1,~y_ds,xstream);
 
-			//============= as a pseudo ugen ============
-			ystream = ~tree.krstream(Impulse.kr(10),~inBuf,~outBuf,1,~y_ds,xstream);
+			// if you don't need to access the buffers elsewhere so they can just be LocalBuf
+			ystream = ~tree.krstreamlocal(Impulse.kr(10),~n_xdims,~n_ydims,1,~y_ds,xstream);
 
 			ystream.poll;
 		}.play;
