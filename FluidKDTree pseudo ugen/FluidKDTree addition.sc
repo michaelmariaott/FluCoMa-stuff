@@ -1,4 +1,5 @@
 + FluidKDTree {
+
 	krstream {
 		arg trig, inputBuffer, outputBuffer, numNeighbours = 1, lookupDataSet, inputStream;
 
@@ -18,7 +19,7 @@
 	krstreamlocal {
 		arg trig, inputSize, outputSize, numNeighbours = 1, lookupDataSet, inputStream;
 		var inputBuffer = LocalBuf(inputSize);
-		var outputBuffer = LocalBuf(outputSize);
+		var outputBuffer = LocalBuf(outputSize * numNeighbours);
 
 		^this.krstream(trig,inputBuffer,outputBuffer,numNeighbours,lookupDataSet,inputStream);
 	}
