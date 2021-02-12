@@ -1,5 +1,3 @@
-import json
-import numpy as np
 from sklearn.neural_network import MLPRegressor
 
 def mlpToFluidJsonDict(mlp):
@@ -14,7 +12,7 @@ def mlpToFluidJsonDict(mlp):
     '''
     weights = mlp.coefs_
     biases = mlp.intercepts_
-    json = {"layers":[{} for _ in range(mlp.n_layers_ - 1)]}
+    json_dict = {"layers":[{} for _ in range(mlp.n_layers_ - 1)]}
     activation = 0
     
     if mlp.activation == 'identity':
@@ -33,15 +31,15 @@ def mlpToFluidJsonDict(mlp):
         # print('i',i)
         # print('len biases',len(biases))
         if i == (len(biases) - 1):
-            json["layers"][i]["activation"] = 0 # identity for the last layer
+            json_dict["layers"][i]["activation"] = 0 # identity for the last layer
         else:
-            json["layers"][i]["activation"] = activation
+            json_dict["layers"][i]["activation"] = activation
 
         # print('inserted act',json["layers"][i]["activation"])
         # print('')
         
-        json["layers"][i]["biases"] = list(biases_array)
-        json["layers"][i]["cols"] = len(biases_array)
-        json["layers"][i]["rows"] = len(weights[i])
-        json["layers"][i]["weights"] = list([list(w) for w in weights[i]])
-    return json
+        json_dict["layers"][i]["biases"] = list(biases_array)
+        json_dict["layers"][i]["cols"] = len(biases_array)
+        json_dict["layers"][i]["rows"] = len(weights[i])
+        json_dict["layers"][i]["weights"] = list([list(w) for w in weights[i]])
+    return json_dict
