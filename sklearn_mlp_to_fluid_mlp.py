@@ -13,19 +13,9 @@ def mlpToFluidJsonDict(mlp):
     weights = mlp.coefs_
     biases = mlp.intercepts_
     json_dict = {"layers":[{} for _ in range(mlp.n_layers_ - 1)]}
-    activation = 0
     
-    if mlp.activation == 'identity':
-        activation = 0
-    elif mlp.activation == 'logistic':
-        activation = 1
-    elif mlp.activation == 'tanh':
-        activation = 2
-    elif mlp.activation == 'relu':
-        activation = 3
-    else:
-        print('ERROR: no appropriate activation function found')
-        exit()
+    activation_map = {'identity':0,  'logistic':1,  'relu':2, 'tanh':3}
+    acvtivation = activation_map[mlp.activation]
 
     for i, biases_array in enumerate(biases):
         # print('i',i)
