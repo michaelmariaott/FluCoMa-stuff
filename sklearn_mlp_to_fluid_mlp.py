@@ -15,7 +15,7 @@ def mlpToFluidJsonDict(mlp):
     json_dict = {"layers":[{} for _ in range(mlp.n_layers_ - 1)]}
     
     activation_map = {'identity':0,  'logistic':1,  'relu':2, 'tanh':3}
-    acvtivation = activation_map[mlp.activation]
+    activation = activation_map[mlp.activation]
 
     for i, biases_array in enumerate(biases):
         # print('i',i)
